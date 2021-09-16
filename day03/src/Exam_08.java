@@ -22,5 +22,6 @@ public class Exam_08 {
 		} else {
 			System.out.println("사칙 연산자가 아닙니다.");
 		}
+		
 	}
 }
