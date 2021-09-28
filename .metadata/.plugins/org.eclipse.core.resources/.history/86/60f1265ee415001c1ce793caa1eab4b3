@@ -1,8 +1,0 @@
-
-public class Exam_02 {
-	public static void main(String[] args) {
-		boolean a = true;
-		boolean b = false;
-		//boolean c = 1; 다른 언어와 틀리게 true와 false만 사용 가능 
-	}
-}

@@ -12,9 +12,9 @@ public class Exam_16 {
 				System.out.print("*");
 			} for(int j=1; j<=a+a-1; ++j) {
 				System.out.print(" ");
-			}for(int k=1; k<=6-a; ++k) {
+			}//for(int k=1; k<=6-a; ++k) {
 				System.out.print("*");
-			} 
+			//} 
 			System.out.println();
 		}
 	}

@@ -1,6 +1,0 @@
-
-public class Exam_01 {
-	public static void main(String[]arge) {
-		System.out.println("¼º Àº º°");
-	}
-}
