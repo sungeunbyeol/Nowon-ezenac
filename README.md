@@ -24,7 +24,8 @@ class Student{
 	}
 	// 이 생성자랑 위에 생성자는 다름.
 	Sutudent(String name, int kor){ 
-		this.name = name; 		 // this. 은 멤버필드에 있는 변수랑 생성자에 있는 변수(매개변수, 일반변수)와 이름이 같을 때 사용
+		// this. 은 멤버필드에 있는 변수랑 생성자에 있는 변수(매개변수, 일반변수)와 이름이 같을 때 사용
+		this.name = name; 
 		this.kor = kor;
 	}
 }
