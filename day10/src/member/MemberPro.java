@@ -3,16 +3,16 @@ package member;
 import java.util.*;
 
 public class MemberPro {
-	private Member2 mb[]; //회원이 한명 이상이기 때문에 배열 사용
-	private int increment; 
+	HashSet Member2; //회원이 한명 이상이기 때문에 배열 사용
+	//private int increment; 
 	private int co;
 	private Scanner in;
 	
 	public MemberPro() {
-		mb = new Member2[5]; //일단 mb 배열을 5개로 선언해줌.
+		HashSet set = new HashSet(); //일단 mb 배열을 5개로 선언해줌.
 		//배열은 5자리인데 공간이 부족하면 increment에서 지정해준 수만큼
 		//추가해줄 수 있게 하려고 만든 변수
-		increment = 3; 
+		//increment = 3; 
 		co = 0;
 		in = new Scanner(System.in);
 	}
@@ -25,7 +25,8 @@ public class MemberPro {
 		System.out.print("회원의 주소 : ");
 		String address = in.next();
 		Member2 input = new Member2(name,tel,address);
-		mb[co] = input;
+		set.add(input);
+		/*
 		++co;
 		if(co==mb.length) {
 			Member2[] mb2= new Member2[mb.length+increment];
@@ -34,6 +35,7 @@ public class MemberPro {
 			}
 			mb = mb2;
 		}
+		*/
 	}
 	public void view() {
 		for(int i=0; i<co; ++i) {
