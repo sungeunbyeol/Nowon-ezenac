@@ -32,6 +32,7 @@ public class MemberGUI extends Frame implements ActionListener{
 		p.add(exit_bt);
 		
 		result_ta.setFont(font);
+		
 		setTextArea();
 		this.add("Center", result_ta);
 	}
