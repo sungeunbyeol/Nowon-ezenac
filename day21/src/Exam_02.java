@@ -2,7 +2,7 @@ import java.io.*;
 import javax.swing.*;
 public class Exam_02 {
 	public static void main(String[] args) throws IOException{
-		File dir = new File("D:\\javaAPI\\study\\day19");
+		File dir = new File("C:\\javaAPI\\study\\day21\\src");
 		File file = new File(dir, "aaa.txt");
 		
 		String[] d = dir.list();	//디렉토리 목록을 String배열로 반환

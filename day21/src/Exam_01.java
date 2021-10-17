@@ -1,12 +1,30 @@
+import java.io.*;
 
 public class Exam_01 {
-	public static void main(String[]args) {
-		File f1 = new File();
-		//폴더랑 파일이랑 구분하여 사용할 수 있음.
-		//
-		
-		//이게 있는 이유는 운영체제마다 표시가 다르기 때문에
-		// String 형으로 갈거냐, char형으로 가지고 갈거냐
-		// path 구별자
+	public static void main(String[] args) {
+		/*
+		File f1 = new File("C:\javaAPI\study\day21\src\\aaa.txt");
+		//\ : \뒤에 특수문자를 처리
+		//윈도우에서의 폴더구별 : \, 리눅스에서의 폴더구별 : /
+		File f2 = new File("C:\javaAPI\study\day21\src", "aaa.txt");
+		File dir = new File("C:\javaAPI\study\day21\src");
+		File f3 = new File(dir, "aaa.txt");
+		//f1, f2, f3 객체는 모두 같은 곳을 가르킨다
+		*/
+		File dir = new File("c:" + File.separator + "javaAPI" + File.separator 
+			+ "study" + File.separator + "day21" + File.separator + "src");
+		File f3 = new File(dir, "aaa.txt");
+		/*
+		System.out.println("File.separator = " + File.separator);
+		System.out.println("File.separatorChar = " + File.separatorChar);
+		System.out.println("File.pathSeparator = " + File.pathSeparator);
+		System.out.println("File.pathSeparatorChar = " + File.pathSeparatorChar);
+		*/
 	}
 }
+
+
+
+
+
+

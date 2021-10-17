@@ -2,7 +2,7 @@ import java.io.*;
 
 public class Exam_07 {
 	public static void main(String[] args) throws Exception {
-		File dir = new File("D:\\javaAPI\\study\\day21\\src");
+		File dir = new File("C:\\javaAPI\\study\\day21\\src");
 		File file = new File(dir, "ccc.txt");
 		
 		FileWriter fw = new FileWriter(file);

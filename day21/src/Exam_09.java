@@ -4,6 +4,7 @@ public class Exam_09 {
 	public static void main(String[] args) {
 		String str = "홍길동@100@유재석@80@강호동@70@이수근@50@이경규@100@정형돈@80";
 		Scanner in = new Scanner(str).useDelimiter("\\s*@\\s*");
+		//@를 중심으로 글을 나누는데 앞에 공백에 0개이상 뒤에 공백 0개 이상 까지 구별자라는 뜻
 		while(true) {
 			try {
 				String name = in.next();

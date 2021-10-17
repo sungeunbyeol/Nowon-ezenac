@@ -5,13 +5,13 @@ import java.io.*;
 
 public class Exam_05 {
 	public static void main(String[]args) throws Exception {
-		File dir = new File("D:\\javaAPI\\study\\day21\\src");
+		File dir = new File("C:\\javaAPI\\study\\day21\\src");
 		File file = new File(dir, "bbb.txt");
 		
 		FileOutputStream fos = new FileOutputStream(file);
 		BufferedOutputStream bos = new BufferedOutputStream(fos);
 		DataOutputStream dos = new DataOutputStream(bos);
-		
+		 
 		dos.writeUTF("æ»≥Á«œººø©!!");
 		dos.writeInt(1230);
 		dos.writeDouble(10.23);
