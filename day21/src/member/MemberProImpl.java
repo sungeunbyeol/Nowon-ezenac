@@ -78,41 +78,26 @@ public class MemberProImpl implements MemberPro{
 	@Override
 	public void save() {
 		try {
-			FileWriter fw = new FileWriter(file);
-			BufferedWriter bw = new BufferedWriter(fw);
-			PrintWriter pw = new PrintWriter(bw);
-			for(Member view : set) {
-				pw.print(view.getName());
-				pw.print(view.getTel());
-				pw.println(view.getAddress());
-			}
-			pw.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+			FileOutputStream fos = new FileOutputStream(file);
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
+			ObjectOutputStream oos = new ObjectOutputStream(bos);
+			
+			oos.writeObject(set);
+			oos.close();
+		}catch(Exception e) {}
 	}
 
 	@Override
 	public void load() {
 		set.clear();
 		try {
-			FileReader fr = new FileReader(file);
-			BufferedReader br = new BufferedReader(fr);
+			FileInputStream fis = new FileInputStream(file);
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			ObjectInputStream ois = new ObjectInputStream(bis);
 			
-			while(true) {
-				String name = br.readLine();
-				String tel = br.readLine();
-				String address = br.readLine();
-				Member mem = new Member(name, tel, address);
-				set.add(mem);
+				set = (ArrayList)ois.readObject();
 			}
-		}catch(FileNotFoundException e) {
-			try {
-				file.createNewFile();
-			}catch(IOException ee) {}
-		}catch(EOFException e) {
-			System.out.println("파일 업로드 끝!!!");
-		}catch(IOException e) {}
+		}catch(Exception e) {}
 		
 	}
 

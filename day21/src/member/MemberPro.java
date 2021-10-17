@@ -1,6 +1,6 @@
 package member;
 
-public interface MemberPro {
+public interface MemberPro{
 	public void input();
 	public void view();
 	public void edit();
