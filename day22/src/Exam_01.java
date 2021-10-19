@@ -1,13 +1,10 @@
-package calender;
-
 import java.awt.*;
+import java.util.*;
 import java.awt.event.*;
-import java.io.File;
-import java.util.Calendar;
-
 import javax.swing.*;
+import java.io.*;
 
-class MyFrame08 extends JFrame implements ActionListener{
+class MyFrame01 extends JFrame implements ActionListener{
 	private JButton left_bt = new JButton("◀");
 	private JButton right_bt = new JButton("▶");
 	private int year = 2021;
@@ -19,13 +16,8 @@ class MyFrame08 extends JFrame implements ActionListener{
 	private JButton[] week = new JButton[7];
 	private String[] str = new String[] {"일","월","화","수","목","금","토"};
 	private JButton[] bt = new JButton[42];
-	
-	File dir = new File("C:\\javaAPI\\study\\day21\\src\\calender");
-	File file = new File(dir, "Month+day.txt"); //날짜 파일을 그날짜 이름으로 저장될 수 있도록 하면 되는데..
-	private JDialog dig = new JDialog();
-	private JTextArea txtarea = new JTextArea();
-	private JButton jinputbt = new JButton("입력");
-	
+			
+	private MessageDialog message = new MessageDialog(this);
 	public void init() {
 		this.setLayout(new BorderLayout());
 		this.add("North", north_p);
@@ -46,10 +38,8 @@ class MyFrame08 extends JFrame implements ActionListener{
 			bt[i].addActionListener(this);
 		}
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		message.bt.addActionListener(this);
 		buttonSetting();
-		dig.setLayout(new BorderLayout());
-		dig.add("Center",txtarea);
-		dig.add("South",jinputbt);
 	}
 	
 	public void buttonSetting() {
@@ -72,7 +62,7 @@ class MyFrame08 extends JFrame implements ActionListener{
 		
 	}
 	
-	public MyFrame08(String title) {
+	public MyFrame01(String title) {
 		super(title);
 		
 		this.init();
@@ -100,25 +90,41 @@ class MyFrame08 extends JFrame implements ActionListener{
 				month = 12;
 				--year;
 			}
+			lb.setText(year+"년 "+month + "월");
+			buttonClear();
+			buttonSetting();
 		}else if (e.getSource()==right_bt) {
 			++month;
 			if (month == 13) {
 				month = 1;
 				++year;
 			}
-		}//else if(e.getSource()==bt) {
-		//	for(int i=0; i<bt.length;++i) {
-			//	bt[i] = new JButton();
-		//		dig.setVisible(true);
-			//}
-		//}
-		lb.setText(year+"년 "+month + "월");
-		buttonClear();
-		buttonSetting();
+			lb.setText(year+"년 "+month + "월");
+			buttonClear();
+			buttonSetting();
+		}else if (message.bt == e.getSource()){
+			message.saveMessage();
+			message.setVisible(false);
+		}else {
+			for(int i=0; i<42; ++i) {
+				if (bt[i] == e.getSource()) {
+					String filename = String.valueOf(year);
+					if (month<10) 	filename += "0" + month;
+					else 			filename += month;
+					String day = e.getActionCommand();
+					if (Integer.parseInt(day)<10) 	filename += "0" + day;
+					else 							filename += day;
+					filename += ".txt";
+					message.loadMessage(filename);
+					message.setVisible(true);
+				}
+			}
+		}
 	}
 }
-public class Exam_08 {
+
+public class Exam_01 {
 	public static void main(String[] args) {
-		MyFrame08 mf = new MyFrame08("다이어리 예제");
+		MyFrame01 mf = new MyFrame01("다이어리예제");
 	}
 }
