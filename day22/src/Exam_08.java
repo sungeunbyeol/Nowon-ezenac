@@ -1,117 +1,105 @@
+import java.io.*;
+import java.net.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.net.*;
-import java.io.*;
+import javax.swing.text.*;
 
-class MyFrame08 extends JFrame implements Runnable, ActionListener, KeyListener{
-	private JTextArea jta = new JTextArea();
-	private JScrollPane jsp = new JScrollPane(jta);
-	private JPanel south_p = new JPanel();
-	private JLabel msg_lb = new JLabel("메세지", JLabel.RIGHT);
+class MyFrame08 extends JFrame implements Runnable, ActionListener{
+	JTextPane textPane = new JTextPane();
+	StyledDocument doc = textPane.getStyledDocument(); 
+    SimpleAttributeSet left = new SimpleAttributeSet(); 
+    SimpleAttributeSet right = new SimpleAttributeSet(); 
+    
+	private JScrollPane jsp = new JScrollPane(textPane); //Jtexts는 스크롤이 없기 때문에 만들어줘야됨
+	private JLabel lb = new JLabel("메세지 : ", JLabel.RIGHT);
 	private JTextField jtf = new JTextField();
 	private JButton jbt = new JButton("전송");
+	private JPanel jp = new JPanel();
 	
 	private ServerSocket ss;
 	private Socket soc;
 	private PrintWriter pw;
-	private BufferedReader br;
+	private BufferedReader in;
 	
-	public void init() {
+	public void init(){
+		StyleConstants.setAlignment(left, StyleConstants.ALIGN_LEFT); 
+	    StyleConstants.setForeground(left, Color.RED);
+	    
+	    StyleConstants.setAlignment(right, StyleConstants.ALIGN_RIGHT); 
+	    StyleConstants.setForeground(right, Color.BLUE);
+	    
 		Container con = this.getContentPane();
 		con.setLayout(new BorderLayout());
-		jta.setFont(new Font("", Font.PLAIN, 15));
-		jta.setEditable(false);//jtextarea안에 직접 글을 쓰지 못한다.
+		textPane.setFont(new Font("", Font.PLAIN, 15));
+		textPane.setEditable(false);
 		con.add("Center", jsp);
-		con.add("South", south_p);
-		south_p.setLayout(new BorderLayout());
-		south_p.add("West", msg_lb);
-		south_p.add("Center", jtf);
-		south_p.add("East", jbt);
+		con.add("South", jp);
+		jp.setLayout(new BorderLayout());
+		jp.add("West", lb);
+		jp.add("Center", jtf);
+		jp.add("East", jbt);
 	}
-	
-	public void start() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public void start(){
 		jbt.addActionListener(this);
-		jtf.addKeyListener(this);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-	public MyFrame08(String title) {
+	public MyFrame08(String title){
 		super(title);
-		
 		this.init();
 		this.start();
-		
 		super.setSize(400, 300);
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		int xpos = (int)(screen.getWidth() - this.getWidth()) / 2;
-		int ypos = (int)(screen.getHeight() - this.getHeight()) / 2;
-		super.setLocation(xpos, ypos);
+		int x = (int)(screen.getWidth()/2 - super.getWidth()/2);
+		int y = (int)(screen.getHeight()/2 - super.getHeight()/2);
+		super.setLocation(x, y);
 		super.setResizable(false);
-		
 		super.setVisible(true);
-		try {
+		try{
 			ss = new ServerSocket(12345);
 			soc = ss.accept();
-			jta.setText("클라이언트 접속 성공!!" + "\n");
+			doc.insertString(doc.getLength(), "클라이언트 접속 성공!!", left); 
+			doc.setParagraphAttributes(doc.getLength(), 1, left, false);
 			pw = new PrintWriter(soc.getOutputStream(), true);
-			//2번째 매개변수 true는 버퍼메모리를 자동으로 비워주세요 하는 신호
-		}catch(Exception e) {}
+		}catch(Exception e){}
 		Thread th = new Thread(this);
 		th.start();
 	}
-
+	public void run(){
+		try{
+			in = new BufferedReader
+				(new InputStreamReader(soc.getInputStream()));
+			String clMsg = "";
+			while(true){
+				clMsg = in.readLine();
+				doc.insertString(doc.getLength(), "\n"+clMsg, left); 
+				doc.setParagraphAttributes(doc.getLength(), 1, left, false);
+			}
+		}catch(IOException e){
+			e.printStackTrace();
+		}catch(BadLocationException e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==jbt) {
-			String msg = jtf.getText();
-			pw.println(msg);
-			pw.flush();
-			jta.append("Server : " + msg +"\n");
-			jtf.setText("");
-		}
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {	//enter키를 눌렀을때 
-			String msg = jtf.getText();
-			pw.println(msg);
+		if (e.getSource() == jbt){
+			pw.println(jtf.getText());
 			pw.flush();
-			jta.append("Server : " + msg +"\n");
-			jtf.setText("");
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void run() {
-		try {
-			br = new BufferedReader(new InputStreamReader(soc.getInputStream()));
-			while(true) {
-				String msg = br.readLine();
-				jta.append("Client : " + msg+"\n");
+			try {
+				doc.insertString(doc.getLength(), "\n"+jtf.getText(), right); 
+				doc.setParagraphAttributes(doc.getLength(), 1, right, false);
+			}catch(BadLocationException ee) {
+				ee.printStackTrace();
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}	
-		
+			jtf.setText("");
+		}
 	}
 }
+
 public class Exam_08 {
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		MyFrame08 mf = new MyFrame08("채팅서버");
 	}
 }
