@@ -13,6 +13,7 @@ class SearchFrame extends JFrame implements ActionListener{
 	private JPanel p1 = new JPanel();
 	private JPanel p2 = new JPanel();
 	private LoginDialog loginDi = new LoginDialog("로그인");
+	//private NewDialog nd = new NewDialog("회원가입");
 	
 	public void init() {
 		Container con = this.getContentPane();
@@ -52,7 +53,7 @@ class SearchFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==loginbt) {
 			loginDi.setVisible(true);
-			this.setVisible(false);
+			//this.setVisible(false);
 		}
 	}
 }

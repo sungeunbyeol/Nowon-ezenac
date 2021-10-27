@@ -7,6 +7,7 @@ import java.awt.event.*;
 public class NewDialog extends JFrame implements ActionListener{
 	private MainDialog md = new MainDialog("도서사이트");
 	
+	
 	private JLabel name_lb = new JLabel("이름 :                       ");
 	private JLabel tel_lb = new JLabel("전화번호 :              ");
 	private JLabel id_lb = new JLabel("사용할 아이디 :     ");
@@ -24,6 +25,7 @@ public class NewDialog extends JFrame implements ActionListener{
 	private JPanel jp5 = new JPanel();
 	
 	private JButton input_bt = new JButton("확인");
+	private JButton cencle_bt = new JButton("취소");
 	
 	public void init() {
 		Container con = this.getContentPane();
@@ -45,13 +47,15 @@ public class NewDialog extends JFrame implements ActionListener{
 		jp4.add("West", pw_lb);
 		jp4.add("Center", pw_jtf);
 		con.add(jp5);
-		jp5.setLayout(new BorderLayout());
-		jp5.add("Center", input_bt);
+		jp5.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		jp5.add(cencle_bt);
+		jp5.add(input_bt);
 		
 	}
 	public void start() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		input_bt.addActionListener(this);
+		cencle_bt.addActionListener(this);
 	}
 	
 	public NewDialog(String title) {
@@ -72,6 +76,8 @@ public class NewDialog extends JFrame implements ActionListener{
 		//확인 버튼을 누르면 DB에 회원으로 등록되어야 함
 		if(e.getSource()==input_bt) {
 			md.setVisible(true);
+			this.setVisible(false);
+		}else if(e.getSource()==cencle_bt) {
 			this.setVisible(false);
 		}
 		

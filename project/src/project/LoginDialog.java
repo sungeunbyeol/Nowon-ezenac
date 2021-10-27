@@ -27,9 +27,11 @@ class LoginDialog extends JFrame implements ActionListener{
 	private JPanel bt_p = new JPanel();
 	private JButton check_bt = new JButton("확인");
 	private JButton new_bt = new JButton("회원가입");
+	private JButton back_bt = new JButton("취소");
 	
 	private MainDialog md = new MainDialog("도서사이트");
 	private NewDialog nd = new NewDialog("회원가입");
+	
 	
 	public void init() {
 		Container con = this.getContentPane();
@@ -46,13 +48,14 @@ class LoginDialog extends JFrame implements ActionListener{
 		con.add(bt_p);
 		bt_p.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		bt_p.add(new_bt);
+		bt_p.add(back_bt);
 		bt_p.add(check_bt);
-		
 	}
 	public void start() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		check_bt.addActionListener(this);
 		new_bt.addActionListener(this);
+		back_bt.addActionListener(this);
 	}
 	
 	LoginDialog(String title) {
@@ -78,9 +81,11 @@ class LoginDialog extends JFrame implements ActionListener{
 		}else if(e.getSource()== new_bt) {
 			nd.setVisible(true);
 			this.setVisible(false);
+		}else if(e.getSource()==back_bt) {
+			this.setVisible(false);
 		}//else if() {
-			// 관리자 아이디로 로그인하면 관리자 화면 띄어줘야 됨
-		//}
+		// 관리자 아이디로 로그인하면 관리자 화면 띄어줘야 됨
+	//}
 		
 	}
 
