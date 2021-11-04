@@ -75,7 +75,7 @@ public class NewDialog extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//확인 버튼을 누르면 DB에 회원으로 등록되어야 함
 		if(e.getSource()==input_bt) {
-			md.setVisible(true);
+			//md.setVisible(true);
 			this.setVisible(false);
 		}else if(e.getSource()==cencle_bt) {
 			this.setVisible(false);

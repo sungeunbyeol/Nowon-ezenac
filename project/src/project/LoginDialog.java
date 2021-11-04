@@ -31,6 +31,7 @@ class LoginDialog extends JFrame implements ActionListener{
 	
 	private MainDialog md = new MainDialog("도서사이트");
 	private NewDialog nd = new NewDialog("회원가입");
+	//private SearchFrame sh = new SearchFrame("검색");
 	
 	
 	public void init() {
@@ -78,9 +79,10 @@ class LoginDialog extends JFrame implements ActionListener{
 		if(e.getSource()==check_bt) {
 			md.setVisible(true);
 			this.setVisible(false);
+			//sh.setVisible(false);
 		}else if(e.getSource()== new_bt) {
 			nd.setVisible(true);
-			this.setVisible(false);
+			//this.setVisible(false);
 		}else if(e.getSource()==back_bt) {
 			this.setVisible(false);
 		}//else if() {

@@ -57,9 +57,3 @@ class SearchFrame extends JFrame implements ActionListener{
 		}
 	}
 }
-
-public class Search {
-	public static void main(String[] args) {
-		SearchFrame sf = new SearchFrame("°Ë»ö");
-	}
-}

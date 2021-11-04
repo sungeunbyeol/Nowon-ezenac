@@ -19,7 +19,7 @@ public class MainDialog extends JFrame implements ActionListener{
 		con.setLayout(new BorderLayout());
 		con.add("North",p);
 		p.setLayout(new GridLayout(1,3));
-		TabName[] tabname = TabName.values();
+		MainName[] tabname = MainName.values();
 		for(int i=0; i<bt.length; ++i) {
 			bt[i] = new JButton(String.valueOf(tabname[i]));
 			p.add("North",bt[i]);
